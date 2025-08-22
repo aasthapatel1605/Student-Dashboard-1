@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Student Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=League+Gothic&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rosario&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sansation:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen&display=swap" rel="stylesheet">
+  <link href="https://fonts.cdnfonts.com/css/sansation-light" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-wrapper">
+    <h1>STUDENT DASHBOARD</h1>
+    <p class="subtitle">Track your progress and compete with fellow learners</p>
+    <div class="buttons-container">
+      <button class="dash-btn" onclick="showContent('quiz')" data-tooltip="Take a quiz to earn points"><img src="images/quiz-icon.png" alt="Quiz Icon" width="24" height="24"> TAKE QUIZ</button>
+      <button class="dash-btn" onclick="showContent('progress')" data-tooltip="View your progress stats"><img src="images/progress-icon.png" alt="Progress Icon" width="24" height="24"> PROGRESS</button>
+      <button class="dash-btn" onclick="showContent('rankings')" data-tooltip="See the leaderboard rankings"><img src="images/rankings-icon.png" alt="Rankings Icon" width="24" height="24"> RANKINGS</button>
+      <button class="dash-btn" onclick="showContent('tasks')" data-tooltip="Check your tasks (none available)"><img src="images/tasks-icon.png" alt="Tasks Icon" width="24" height="24"> TASKS</button>
+    </div>
+    <div class="quiz-container" id="quiz">
+      <div class="quiz-card">
+        <div class="question-text">Q1. What is the main goal of supply chain management?</div>
+        <div class="option" onclick="selectOption(this)">Increase the number of suppliers</div>
+        <div class="option" onclick="selectOption(this)">Maximize inventory levels</div>
+        <div class="option" onclick="selectOption(this)">Minimize inventory levels</div>
+        <div class="option" onclick="selectOption(this)">Optimize the flow of goods</div>
+        <div class="buttons"><button class="submit-btn">SUBMIT</button></div>
+      </div>
+      <div class="quiz-card">
+        <div class="question-text">Q2. What is 2 + 2?</div>
+        <div class="option" onclick="selectOption(this)">3</div>
+        <div class="option" onclick="selectOption(this)">4</div>
+        <div class="option" onclick="selectOption(this)">5</div>
+        <div class="option" onclick="selectOption(this)">6</div>
+        <div class="buttons"><button class="submit-btn">SUBMIT</button></div>
+      </div>
+      <div class="quiz-card">
+        <div class="question-text">Q3. Which language is used for web styling?</div>
+        <div class="option" onclick="selectOption(this)">HTML</div>
+        <div class="option" onclick="selectOption(this)">Python</div>
+        <div class="option" onclick="selectOption(this)">CSS</div>
+        <div class="option" onclick="selectOption(this)">Java</div>
+        <div class="buttons"><button class="submit-btn">SUBMIT</button></div>
+      </div>
+      <div class="quiz-card">
+        <div class="question-text">Q4. Who is the father of computers?</div>
+        <div class="option" onclick="selectOption(this)">Isaac Newton</div>
+        <div class="option" onclick="selectOption(this)">Albert Einstein</div>
+        <div class="option" onclick="selectOption(this)">Charles Babbage</div>
+        <div class="option" onclick="selectOption(this)">Alan Turing</div>
+        <div class="buttons"><button class="submit-btn">SUBMIT</button></div>
+      </div>
+      <div class="quiz-card">
+        <div class="question-text">Q5. What gas makes up most of Earth's atmosphere?</div>
+        <div class="option" onclick="selectOption(this)">Oxygen</div>
+        <div class="option" onclick="selectOption(this)">Nitrogen</div>
+        <div class="option" onclick="selectOption(this)">Carbon Dioxide</div>
+        <div class="option" onclick="selectOption(this)">Hydrogen</div>
+        <div class="buttons"><button class="submit-btn">SUBMIT</button></div>
+      </div>
+      <div class="quiz-card">
+        <div class="question-text">Q6. What is the capital of France?</div>
+        <div class="option" onclick="selectOption(this)">London</div>
+        <div class="option" onclick="selectOption(this)">Berlin</div>
+        <div class="option" onclick="selectOption(this)">Madrid</div>
+        <div class="option" onclick="selectOption(this)">Paris</div>
+        <div class="buttons"><button class="submit-btn">SUBMIT</button></div>
+      </div>
+    </div>
+    <div class="progress-container" id="progress">
+      <div class="card attendance">
+        <div class="card-header">
+          <div><div>Attendance Points</div><div class="card-sub">10 Points per session</div></div>
+          <div class="score-value">120</div>
+        </div>
+        <div class="progress"><div class="progress-fill" style="width:75%;"></div></div>
+        <div class="score-caption">120 / 160</div>
+      </div>
+      <div class="card quiz">
+        <div class="card-header">
+          <div><div>Quiz Points</div><div class="card-sub">5 Points per session</div></div>
+          <div class="score-value">45</div>
+        </div>
+        <div class="progress"><div class="progress-fill" style="width:28%;"></div></div>
+        <div class="score-caption">45 / 160</div>
+      </div>
+      <div class="card tasks">
+        <div class="card-header">
+          <div><div>Task Points</div><div class="card-sub">10 Points per session</div></div>
+          <div class="score-value">80</div>
+        </div>
+        <div class="progress"><div class="progress-fill" style="width:50%;"></div></div>
+        <div class="score-caption">80 / 160</div>
+      </div>
+      <div class="overall-score"><i class="fas fa-trophy icon"></i>OVERALL SCORE <span>245</span></div>
+    </div>
+    <div class="rankings-container" id="rankings">
+      <div class="leaderboard-title"></div>
+      <div class="entry">
+        <div class="rank">1</div>
+        <div class="info"><div class="name">TUSHAR</div><div class="role">UI UX DESIGNER</div></div>
+        <div class="points">400 P</div>
+      </div>
+      <div class="entry">
+        <div class="rank">2</div>
+        <div class="info"><div class="name">VINAYA</div><div class="role">UI UX DESIGNER</div></div>
+        <div class="points">378 P</div>
+      </div>
+      <div class="entry">
+        <div class="rank">3</div>
+        <div class="info"><div class="name">KARTIK</div><div class="role">UI UX DESIGNER</div></div>
+        <div class="points">203 P</div>
+      </div>
+      <div class="entry">
+        <div class="rank">4</div>
+        <div class="info"><div class="name">VIVEK</div><div class="role">UI UX DESIGNER</div></div>
+        <div class="points">176 P</div>
+      </div>
+    </div>
+    <div class="tasks-container" id="tasks">
+      <div class="tasks-title"></div>
+      <div class="no-tasks">No Tasks Available</div>
+    </div>
+    <div class="section-title">FROM THE DESK OF EXPERIENCE</div>
+    <div class="section-subtitle">HEAR FROM OUR ALUMNI AND PROFESSORS</div>
+    <div class="carousel-container" id="carousel">
+      <div class="testimonial-slider" id="slider">
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="avatar"></div>
+            <div class="name-title"><div class="name">Karan Singh</div><div class="title">Alumni 2020</div></div>
+          </div>
+          <p>The support from faculty and tools like this dashboard paved the way for my success.</p>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="avatar"></div>
+            <div class="name-title"><div class="name">Vijay Pande</div><div class="title">Prof. of Physics</div></div>
+          </div>
+          <p>Whether it’s the wisdom of our Principal, the dedication of our HODs, or the success stories of our alumni — each message reflects the legacy we build together.</p>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="avatar"></div>
+            <div class="name-title"><div class="name">Sneha Kapoor</div><div class="title">Alumni 2021</div></div>
+          </div>
+          <p>Our professors encouraged me to innovate and grow — proud to be part of this institution.</p>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="avatar"></div>
+            <div class="name-title"><div class="name">Rahul Mehta</div><div class="title">Alumni 2023</div></div>
+          </div>
+          <p>Ranking among the top, this dashboard helped me plan and excel throughout my studies.</p>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="avatar"></div>
+            <div class="name-title"><div class="name">Anita Sharma</div><div class="title">Prof. of Chemistry</div></div>
+          </div>
+          <p>The collaborative environment here fosters innovation and critical thinking among students.</p>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="avatar"></div>
+            <div class="name-title"><div class="name">Priya Desai</div><div class="title">Alumni 2022</div></div>
+          </div>
+          <p>This dashboard was a game-changer, helping me track my progress and stay motivated.</p>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="avatar"></div>
+            <div class="name-title"><div class="name">Priya Desai</div><div class="title">Alumni 2022</div></div>
+          </div>
+          <p>This dashboard was a game-changer, helping me track my progress and stay motivated.</p>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial-header">
+            <div class="avatar"></div>
+            <div class="name-title"><div class="name">Priya Desai</div><div class="title">Alumni 2022</div></div>
+          </div>
+          <p>This dashboard was a game-changer, helping me track my progress and stay motivated.</p>
+        </div>
+      </div>
+      <div class="hover-zone hover-left" id="hoverLeft"></div>
+      <div class="hover-zone hover-right" id="hoverRight"></div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

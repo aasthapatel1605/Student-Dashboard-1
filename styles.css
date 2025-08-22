@@ -1,0 +1,627 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Sansation Light', sans-serif;
+  background-color: #00133a;
+  background: linear-gradient(to bottom, #00133a 0%, #01163f 40%, #000B20 70%, #466266 100%);
+  /* background: linear-gradient (to bottom, #00133a 0%, #092150 40%, #000B20 70%, #466266 100%); */
+  overflow-x: hidden;
+  color: white;
+}
+
+.page-wrapper {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-weight: 50;
+  font-family: 'League Gothic', sans-serif;
+  font-size: 3.6rem;
+  text-align: center;
+  color: white;
+  margin: 44px 0 0;
+}
+
+.subtitle {
+  font-family: 'Sansation Light', sans-serif;
+  font-weight: 300;
+  font-size: 1.3rem;
+  text-align: center;
+  background: linear-gradient(90deg, #ffffff, #9e9999);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 11px;
+  margin-top: 25px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  margin-top: 35px;
+}
+
+.dash-btn {
+  font-family: 'Sansation', sans-serif;
+  flex: 1 1 45%;
+  min-width: 140px;
+  max-width: 180px;
+  height: 42px;
+  background-color: #20344e;
+  color: #D5D5D5;
+  font-size: 1rem;
+  border-radius: 11px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: middle;
+  gap: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s;
+  position: relative;
+  overflow: visible;
+  padding: 0 25px;
+}
+
+.dash-btn img {
+  width: 24px;
+  height: 24px;
+  vertical-align: left;
+}
+
+.dash-btn:hover img {
+  animation: pulse 1.5s infinite;
+}
+
+.dash-btn.active img {
+  filter: brightness(0) saturate(100%) hue-rotate(120deg);
+  animation: none;
+}
+
+.dash-btn i {
+  color: white;
+  transition: color 0.3s;
+}
+
+.dash-btn.active {
+  background-color: white;
+  color: #20344e;
+}
+
+.dash-btn.active i {
+  color: green;
+}
+
+.quiz-container, .progress-container, .rankings-container, .tasks-container {
+  width: 100%;
+  max-width: 430px;
+  margin-top: 30px;
+  display: none;
+  padding: 20px 0;
+  overflow-y: auto;
+  max-height: 80vh;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.quiz-container::-webkit-scrollbar, .progress-container::-webkit-scrollbar, 
+.rankings-container::-webkit-scrollbar, .tasks-container::-webkit-scrollbar {
+  display: none;
+}
+
+.quiz-container.active, .progress-container.active, 
+.rankings-container.active, .tasks-container.active {
+  display: block;
+}
+
+.quiz-card {
+  width: 316px;
+  height: 371px;
+  border-radius: 22px;
+  background: rgba(193, 193, 193, 0.5);
+  opacity: 0.95;
+  padding: 24px;
+  box-sizing: border-box;
+  color: black;
+  margin: 0 auto 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.quiz-card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.question-text {
+  width: 241px;
+  height: 40px;
+  margin: 0 auto 20px;
+  font-family: 'Rosario', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  text-align: center;
+  line-height: 122%;
+  padding: 8px;
+  border-radius: 8px;
+  color: white;
+}
+
+.option {
+  width: 253px;
+  height: 37px;
+  background: rgba(193, 193, 193, 0.5);
+  border-radius: 18px;
+  margin: 8px auto;
+  text-align: center;
+  line-height: 37px;
+  font-size: 13px;
+  font-family: 'Sansation Light', sans-serif;
+  cursor: pointer;
+  transition: background 0.3s, font-weight 0.3s;
+}
+
+.option.selected {
+  background: #5DA67A;
+  color: white;
+  font-weight: bold;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 18px;
+}
+
+.submit-btn, .reset-btn {
+  padding: 8px 16px;
+  background: #7F8753;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.reset-btn {
+  background: #5a5a5a;
+}
+
+.submit-btn:hover, .reset-btn:hover {
+  background: green;
+}
+
+.progress-container {
+  opacity: 0.95;
+}
+
+.card {
+  width: 321px;
+  height: 138px;
+  border-radius: 18px;
+  border: 1px solid #FFFFFF;
+  padding: 12px 20px;
+  margin: 29px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  backdrop-filter: blur(10px);
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.card.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.attendance {
+  background: rgba(130, 193, 244, 0.49);
+}
+
+.quiz {
+  background: rgba(118, 219, 128, 0.49);
+}
+
+.tasks {
+  background: rgba(189, 143, 143, 0.49);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+}
+
+.card-sub {
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.progress {
+  width: 256px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: white;
+  border-radius: 8px;
+}
+
+.score-value {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-family: 'Silkscreen', sans-serif;
+  font-size: 24px;
+  line-height: 122%;
+  color: white;
+}
+
+.score-caption {
+  font-size: 12px;
+  text-align: left;
+  margin-top: 0;
+}
+
+.overall-score {
+  margin: 25px auto 0;
+  background: #F1F1F1;
+  color: #000;
+  padding: 10px 4px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  gap: 47px;
+  font-size: 22px;
+  font-family: 'Abel', sans-serif;
+  width: 321px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.overall-score.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.overall-score span {
+  font-family: 'Silkscreen', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #b9a438;
+  text-align: left;
+}
+
+.rankings-container {
+  width: 100%;
+  max-width: 430px;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  color: white;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  backdrop-filter: blur(8px);
+}
+
+.rankings-container.active {
+  display: flex;
+}
+
+.leaderboard-title {
+  font-family: 'League Gothic', sans-serif;
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #f6f6f7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.entry {
+  width: 100%;
+  max-width: 340px;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+  padding: 0 15px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease;
+  border: 1px solid rgb(254, 254, 254);
+  backdrop-filter: blur(4px);
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.1);
+}
+
+.entry.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.entry:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.rank {
+  font-family: 'Sansation Light', sans-serif;
+  font-weight: 300;
+  font-size: 26px;
+  color: #f6f6f7;
+  margin-right: 10px;
+  margin-left: 4px;
+  transform: scaleX(0.7);
+}
+
+.info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 20px;
+}
+
+.name {
+  font-family: 'Sansation Light', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 100%;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  /* background: linear-gradient(90deg, #ffffff, #9e9999); */
+  background: linear-gradient(90deg, #9e9999, #000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.role {
+  font-family: 'Sansation Light', sans-serif;
+  font-weight: 300;
+  font-size: 11px;
+  line-height: 120%;
+  color: #ccc;
+}
+
+.points {
+  font-family: 'Silkscreen', sans-serif;
+  font-size: 14px;
+  color: #47ECE4;
+  margin-left: 10px;
+}
+
+.tasks-container {
+  width: 100%;
+  max-width: 430px;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  color: white;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tasks-container.active {
+  display: flex;
+}
+
+.tasks-title {
+  font-family: 'League Gothic', sans-serif;
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #f6f6f7;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.no-tasks {
+  font-family: 'Sansation Light', sans-serif;
+  font-size: 20px;
+  color: white;
+  padding: 20px;
+  background: linear-gradient(179.98deg, #333341 -5.41%, #3d3d57 99.99%);
+  border-radius: 12px;
+  border: 1px solid rgba(222, 203, 203, 0.3);
+  backdrop-filter: blur(4px);
+  box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  width: 100%;
+  max-width: 340px;
+}
+
+.no-tasks.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.no-tasks:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.icon {
+  font-size: 1.3rem;
+}
+
+.section-title {
+  font-family: 'League Gothic', sans-serif;
+  font-size: 2.6rem;
+  font-weight: 400;
+  text-align: center;
+  color: white;
+  margin-top: 110px;
+  margin-bottom: 15px;
+}
+
+.section-subtitle {
+  font-family: 'Sansation', sans-serif;
+  font-weight: 300;
+  font-size: 1.2rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 50px;
+}
+
+.carousel-container {
+  width: 100%;
+  max-width: 430px;
+  overflow: hidden;
+  position: relative;
+  touch-action: pan-y;
+}
+
+.testimonial-slider {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+  gap: 16px;
+  padding: 0 10px;
+  will-change: transform;
+}
+
+.testimonial {
+  flex: 0 0 60%;
+  max-width: 300px;
+  background: white;
+  border-radius: 22px;
+  padding: 24px;
+  color: black;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  background-color: #f7b5b5;
+  border-radius: 50%;
+}
+
+.name-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.32;
+}
+
+.name {
+  font-family: 'Rosario', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #000;
+}
+
+.title {
+  font-family: 'Sansation Light', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #000;
+}
+
+.testimonial p {
+  font-style: italic;
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+.hover-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10%;
+  max-width: 50px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.hover-left {
+  left: 0;
+}
+
+.hover-right {
+  right: 0;
+}
+
+@media (min-width: 768px) {
+  .page-wrapper, .carousel-container, .quiz-container, 
+  .progress-container, .rankings-container, .tasks-container {
+    max-width: 600px;
+  }
+  .testimonial {
+    flex: 0 0 45%;
+  }
+  .entry, .no-tasks {
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-wrapper, .carousel-container, .quiz-container, 
+  .progress-container, .rankings-container, .tasks-container {
+    max-width: 800px;
+  }
+  .entry, .no-tasks {
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 360px) {
+  .rankings-container, .tasks-container {
+    padding: 15px;
+  }
+  .entry, .no-tasks {
+    padding: 0 10px;
+    height: 50px;
+    font-size: 14px;
+  }
+  .rank {
+    font-size: 22px;
+  }
+  .name {
+    font-size: 13px;
+  }
+  .points {
+    font-size: 12px;
+  }
+  .no-tasks {
+    font-size: 16px;
+  }
+}
